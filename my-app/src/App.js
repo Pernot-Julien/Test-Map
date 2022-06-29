@@ -22,8 +22,32 @@ function App() {
   mapboxgl.accessToken = 'pk.eyJ1Ijoicm91bGlvNTU1IiwiYSI6ImNsNHlsZDAwczIwcm4za21sZXlqc2hkMGEifQ.0ZWMXSk670FzzLM1gFR5kA';
   return (
     <div>
-      <div ref={mapContainer} className="map-container" />
-      <p>text</p>
+      <h1 className="text-5xl ml-[2%] mt-[1%]">Mes contacts</h1>
+      <div className="w-full grid grid-cols-4 gap-4 mt-[2%] ml-[2%]">
+        <div className="col-span-3">
+          <div ref={mapContainer} className="border-4 border-black h-[800px]" />
+        </div>
+          <div className="mx-auto text-2xl">
+            <table >
+              <thead className="">
+                <tr>
+                  <th>Contacts</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Item 1</td>
+                </tr>
+                <tr>
+                  <td>Item 2</td>
+                </tr>
+                <tr>
+                  <td>Item 3</td>
+                </tr>
+              </tbody>
+          </table>
+        </div>
+      </div>
     </div>
 
   );
