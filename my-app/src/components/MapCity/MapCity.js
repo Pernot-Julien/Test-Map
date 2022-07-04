@@ -22,7 +22,7 @@ function MapCity() {
     const longitude = event.lngLat.lng;
     const latitude = event.lngLat.lat;
     //console.log(longitude, latitude);
-    setMarkers(markers => [...markers, longitude, latitude]);
+    setMarkers(markers => [...markers,{long:longitude, lat:latitude}]);
     console.log(markers);
   };
    
@@ -35,7 +35,7 @@ function MapCity() {
         initialViewState={viewport}
         width="100vw"
         height="100vh"
-        mapboxApiAccessToken= {MAPBOX_TOKEN}
+        /* mapboxApiAccessToken= {MAPBOX_TOKEN} */
         onViewportChange={viewport => setViewport(viewport)}
         {...viewport}
         mapStyle="mapbox://styles/mapbox/streets-v9"
@@ -51,9 +51,14 @@ function MapCity() {
           <Marker longitude={6.024942} latitude={47.237038} color="red" />
           <Marker longitude={6.002154} latitude={47.240724} color="red" />
           <Marker longitude={6.047449} latitude={47.233789} color="red" />
-          {markers.map((coordinate) => (
-            console.log(coordinate)
-          ))}
+            {
+            markers.map((coordinate) => (
+              <>
+              <p>fsdfsdfsdf</p>
+              <Marker longitude={coordinate.long} latitude={coordinate.lat} color="red" />
+              </>
+            ))
+            }  
           <GeolocateControl />
         </Map>
       </div>
