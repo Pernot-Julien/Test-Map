@@ -58,6 +58,9 @@ function MapCity() {
     console.log(list);
   };
 
+  const markersModify =[ markers[markers.length - 1]];
+  console.log(markersModify, 'tableau modifié');
+
 
   const handleSubmit =(event) => {
    event.preventDefault();
@@ -72,11 +75,10 @@ function MapCity() {
   
 
   const counter = (count) => {
-    if (count > 1) {
+    if (count < 1) {
       return false;
     } else { return true};
   };
-
   
   return (
     <>
@@ -106,27 +108,27 @@ function MapCity() {
           
            { markers.map((coordinate) => (  
               <>     
-              <Marker longitude={coordinate.long} latitude={coordinate.lat} color="red" />
-              {counter(count) && closeWindow && <div className="absolute z-10 text-sm bg-gray-200 border-2 border-black w-[220px] h-[270px]" style={{position:'absolute', left:`${coordinate.left +"px"}` ,top:`${coordinate.top+"px"}`}}>
-               <button onClick={handleClickButton} className='ml-[200px]'>X</button>
-               <form className='flex flex-col' onSubmit={handleSubmit}>
-                <label htmlFor="Nom">Nom</label>
-                    <input type="text" className='mt-[10px] w-[90%] mx-auto' onChange={handleChangeText}/>
-                <label htmlFor="Description" className='mt-[10px]'>Description</label>
-                    <textarea id="Description" onChange={handleChangeDescription} name="Description" className="mt-[10px] w-[90%] mx-auto">
-                    </textarea>
-                <select name="type" onChange={handleChangeList} className="mt-[20px] w-[90%] mx-auto h-[25px]">
-                    <option value="">--Choisir une option--</option>
-                    <option value="Entreprise">Entreprise</option>
-                    <option value="Particulier">Particulier</option>
-                    <option value="Collectivité">Collectivité</option>
-                  </select>
-                  <input type="submit" value="Ajouter" className="border-1 border-black bg-blue-600 h-[30px] w-[100px] mx-auto mt-[20px]"/>
-               </form >
-              </div>}
+              <Marker longitude={coordinate.long } latitude={coordinate.lat} color="red" />
               </>
-            )) }
-           
+            ))}
+            {markersModify.map((coordinate) =>( counter(count) && closeWindow && 
+              <div className="absolute z-10 text-sm bg-gray-200 border-2 border-black w-[220px] h-[270px]" style={{position:'absolute', left:`${coordinate.left +"px"}` ,top:`${coordinate.top+"px"}`}}>
+                <button onClick={handleClickButton} className='ml-[200px]'>X</button>
+                <form className='flex flex-col' onSubmit={handleSubmit}>
+                  <label htmlFor="Nom">Nom</label>
+                      <input type="text" className='mt-[10px] w-[90%] mx-auto' onChange={handleChangeText}/>
+                  <label htmlFor="Description" className='mt-[10px]'>Description</label>
+                      <textarea id="Description" onChange={handleChangeDescription} name="Description" className="mt-[10px] w-[90%] mx-auto">
+                      </textarea>
+                  <select name="type" onChange={handleChangeList} className="mt-[20px] w-[90%] mx-auto h-[25px]">
+                      <option value="">--Choisir une option--</option>
+                      <option value="Entreprise">Entreprise</option>
+                      <option value="Particulier">Particulier</option>
+                      <option value="Collectivité">Collectivité</option>
+                    </select>
+                    <input type="submit" value="Ajouter" className="border-1 border-black bg-blue-600 h-[30px] w-[100px] mx-auto mt-[20px]"/>
+                </form >
+              </div>))}
           <GeolocateControl />
           <div>
           </div>
