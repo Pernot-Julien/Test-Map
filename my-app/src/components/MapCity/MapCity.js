@@ -118,11 +118,11 @@ function MapCity() {
                 <button onClick={handleClickButton} className='ml-[200px]'>X</button>
                 <form className='flex flex-col' onSubmit={handleSubmit}>
                   <label htmlFor="Nom">Nom</label>
-                      <input type="text" className='mt-[10px] w-[90%] mx-auto' onChange={handleChangeText}/>
+                      <input type="text" className='mt-[10px] w-[90%] mx-auto' required="required" onChange={handleChangeText}/>
                   <label htmlFor="Description" className='mt-[10px]'>Description</label>
-                      <textarea id="Description" onChange={handleChangeDescription} name="Description" className="mt-[10px] w-[90%] mx-auto">
+                      <textarea id="Description" required="required" onChange={handleChangeDescription} name="Description" className="mt-[10px] w-[90%] mx-auto">
                       </textarea>
-                  <select name="type" onChange={handleChangeList} className="mt-[20px] w-[90%] mx-auto h-[25px]">
+                  <select name="type" onChange={handleChangeList} required="required" className="mt-[20px] w-[90%] mx-auto h-[25px]">
                       <option value="">--Choisir une option--</option>
                       <option value="Entreprise">Entreprise</option>
                       <option value="Particulier">Particulier</option>
