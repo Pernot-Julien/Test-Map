@@ -1,8 +1,7 @@
 import * as React from 'react';
 import Map, {Marker} from 'react-map-gl';
-
 import 'mapbox-gl/dist/mapbox-gl.css';
-
+import redMarker from '../../assets/images/red_marker.png'
 
 const MAPBOX_TOKEN = 'pk.eyJ1Ijoicm91bGlvNTU1IiwiYSI6ImNsNTB4dmI0bzAwZDQzaW15NGgyb3RneDEifQ.epmA_h4FwLOoZLymM0uZtw'; // Set your mapbox token here
 // fonction qui sert à afficher ma carte 
@@ -19,6 +18,7 @@ function MapCity() {
   const [description, setDescription] = React.useState("");
   const [list, setList] = React.useState("");
 
+
 // ajoute un marker au click sur la carte
   const handleClick = (event) => {
     setCloseWindow(closeWindow => true);
@@ -26,37 +26,30 @@ function MapCity() {
     const latitude = event.lngLat.lat;
     const left = event.point.x;
     const top = event.point.y;
-    console.log(event);
+    const title = localStorage.getItem('textState');
     setCount(count => count + 1);
-    console.log(count)
-    setMarkers(markers => [...markers,{long:longitude, lat:latitude, left:left, top:top}]);
-    console.log(markers);
+    setMarkers(markers => [...markers,{long:longitude, lat:latitude, left:left, top:top, title:title}]);
   };
 // gère la fermeture de la fenêtre associée au marker
   const handleClickButton =(event) => {
     setCloseWindow(closeWindow => false);
     markers.pop();
     setCount(count => 0);
-    console.log(closeWindow);
   };
 // affiche la saisie utilisateur le champ text
   const handleChangeText =(event) => {
     setText(text => event.target.value);
-    console.log(text);
   };
 // affiche la saisie utilisateur le champ description
   const handleChangeDescription =(event) => {
     setDescription(description => event.target.value);
-    console.log(description);
   };
 // affiche le choix de l'utilisateur parmis les éléments de la liste
   const handleChangeList =(event) => {
     setList(list => event.target.value);
-    console.log(list);
   };
 //conserve dans un nouveau tableau les valeurs du dernier marker affiché
   const markersLastElement =[ markers[markers.length - 1]];
-  console.log(markersLastElement, 'tableau modifié');
 
 // soumet le formulaire avec enregistrements des données en localstorage
   const handleSubmit =(event) => {
@@ -64,12 +57,11 @@ function MapCity() {
    localStorage.setItem('textState', text);
    localStorage.setItem('descriptionState', description);
    localStorage.setItem('listState', list);
-   localStorage.setItem('markers', markers);
+   localStorage.setItem('markers', JSON.stringify(markers));
    setCount(count => 0);
    setCloseWindow(window =>false);
   };
 
-  
 //Si le compteur est supérieur à 1 on ne peut ajouter un autre markeur sur la map (il faut soit valider celui en cours ou fermé la fenêtre )
   const counter = (count) => {
     if (count < 1) {
@@ -77,10 +69,6 @@ function MapCity() {
     } else { return true};
   };
 
-/* useEffect(() => {
-   setMarkers
-  },[]); */
-  
   return (
     <>
       <h1 className="text-3xl ml-[2%] mt-[1%]">Contacts</h1>
@@ -96,13 +84,13 @@ function MapCity() {
         mapStyle="mapbox://styles/mapbox/streets-v9"
         mapboxAccessToken={MAPBOX_TOKEN}
         >  
-        <Marker longitude={-113.31} latitude={53.01} color="red" />
-        <Marker longitude={6.002154} latitude={47.240724} color="red" />
-        <Marker longitude={132.047449} latitude={67.233789} color="red" />
+        <Marker longitude={-113.31} latitude={53.01} color="red"><img src={redMarker} alt="" className="w-[40px] translate-y-[-14px]"  /><p className="absolute top-[50%] left-[20px]">Titre à dynamiser</p></Marker>
+        <Marker longitude={6.002154} latitude={47.240724} color="red"><img src={redMarker} alt="" className="w-[40px] translate-y-[-14px]"  /><p className="absolute top-[50%] left-[20px]">Titre à dynamiser</p></Marker>
+        <Marker longitude={132.047449} latitude={67.233789} color="red"><img src={redMarker} alt="" className="w-[40px] translate-y-[-14px]"  /><p className="absolute top-[50%] left-[20px]">Titre à dynamiser</p></Marker>
         
-          { markers.map((coordinate) => (  
+          {  markers.map((coordinate) => (  
             <>     
-            <Marker longitude={coordinate.long } latitude={coordinate.lat} color="red" />
+            <Marker longitude={coordinate.long } latitude={coordinate.lat} color="red"><p className="absolute top-[50%] left-[20px]">Titre à dynamiser</p><img src={redMarker} alt="" className="w-[40px] translate-y-[-15px]"  /></Marker>
             </>
           ))}
           {markersLastElement.map((coordinate) =>( counter(count) && closeWindow && 
@@ -124,6 +112,7 @@ function MapCity() {
                 </form >
               </div>))}
         </Map>
+       
       </div>
     </>
   );
