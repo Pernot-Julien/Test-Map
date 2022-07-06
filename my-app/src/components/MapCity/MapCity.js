@@ -5,7 +5,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 
 const MAPBOX_TOKEN = 'pk.eyJ1Ijoicm91bGlvNTU1IiwiYSI6ImNsNTB4dmI0bzAwZDQzaW15NGgyb3RneDEifQ.epmA_h4FwLOoZLymM0uZtw'; // Set your mapbox token here
-
+// fonction qui sert à afficher ma carte 
 function MapCity() {
   const [viewport, setViewport] = React.useState({
     latitude: 47.238022,
@@ -14,7 +14,7 @@ function MapCity() {
     pitch: 40,
     bearing: 0
   });
-
+// mes différents state
   const [showPopup, setShowPopup] = React.useState(true);
   const [markers, setMarkers] = React.useState([]);
   const [closeWindow, setCloseWindow] = React.useState(true);
@@ -24,6 +24,7 @@ function MapCity() {
   const [description, setDescription] = React.useState("");
   const [list, setList] = React.useState("");
 
+// ajoute un marker au click sur la carte
   const handleClick = (event) => {
     setCloseWindow(closeWindow => true);
     const longitude = event.lngLat.lng;
@@ -36,32 +37,33 @@ function MapCity() {
     setMarkers(markers => [...markers,{long:longitude, lat:latitude, left:left, top:top}]);
     console.log(markers);
   };
+// gère la fermeture de la fenêtre associée au marker
   const handleClickButton =(event) => {
     setCloseWindow(closeWindow => false);
     markers.pop();
     setCount(count => 0);
     console.log(closeWindow);
   };
-
+// affiche la saisie utilisateur le champ text
   const handleChangeText =(event) => {
     setText(text => event.target.value);
     console.log(text);
   };
-
+// affiche la saisie utilisateur le champ description
   const handleChangeDescription =(event) => {
     setDescription(description => event.target.value);
     console.log(description);
   };
-
+// affiche le choix de l'utilisateur parmis les éléments de la liste
   const handleChangeList =(event) => {
     setList(list => event.target.value);
     console.log(list);
   };
-
+//conserve dans un nouveau tableau les valeurs du dernier marker affiché
   const markersModify =[ markers[markers.length - 1]];
   console.log(markersModify, 'tableau modifié');
 
-
+// soumet le formulaire avec enregistrements des données en localstorage
   const handleSubmit =(event) => {
    event.preventDefault();
    localStorage.setItem('textState', text);
@@ -73,7 +75,7 @@ function MapCity() {
   };
 
   
-
+//Si le compteur est supérieur à 1 on ne peut ajouter un autre markeur sur la map (il faut soit valider celui en cours ou fermé la fenêtre )
   const counter = (count) => {
     if (count < 1) {
       return false;
@@ -130,8 +132,6 @@ function MapCity() {
                 </form >
               </div>))}
           <GeolocateControl />
-          <div>
-          </div>
         </Map>
       </div>
     </>
