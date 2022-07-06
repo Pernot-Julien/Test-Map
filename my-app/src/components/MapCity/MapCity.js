@@ -65,6 +65,8 @@ function MapCity() {
    localStorage.setItem('descriptionState', description);
    localStorage.setItem('listState', list);
    console.log(localStorage.getItem('listState'));
+   setCount(count => 0);
+   setCloseWindow(window =>false);
   };
 
   
@@ -101,11 +103,11 @@ function MapCity() {
           <Marker longitude={6.024942} latitude={47.237038} color="red" />
           <Marker longitude={6.002154} latitude={47.240724} color="red" />
           <Marker longitude={6.047449} latitude={47.233789} color="red" />
-          { counter(count) && closeWindow && 
-            markers.map((coordinate) => (  
+          
+           { markers.map((coordinate) => (  
               <>     
               <Marker longitude={coordinate.long} latitude={coordinate.lat} color="red" />
-               <div className="absolute z-10 text-sm bg-gray-200 border-2 border-black w-[220px] h-[270px]" style={{position:'absolute', left:`${coordinate.left +"px"}` ,top:`${coordinate.top+"px"}`}}>
+              {counter(count) && closeWindow && <div className="absolute z-10 text-sm bg-gray-200 border-2 border-black w-[220px] h-[270px]" style={{position:'absolute', left:`${coordinate.left +"px"}` ,top:`${coordinate.top+"px"}`}}>
                <button onClick={handleClickButton} className='ml-[200px]'>X</button>
                <form className='flex flex-col' onSubmit={handleSubmit}>
                 <label htmlFor="Nom">Nom</label>
@@ -121,10 +123,10 @@ function MapCity() {
                   </select>
                   <input type="submit" value="Ajouter" className="border-1 border-black bg-blue-600 h-[30px] w-[100px] mx-auto mt-[20px]"/>
                </form >
-              </div>
+              </div>}
               </>
-            ))
-           }  
+            )) }
+           
           <GeolocateControl />
           <div>
           </div>
