@@ -8,6 +8,10 @@
 
 4- A l'intérieur de ce dossier, ouvrir un terminal, tapez la commande "code ." pour accéder au code du projet.
 
-5- Tapez ensuite la commande " npm start "pour accéder au serveur de développement.
+5- Installez npm avec "npm i"
 
-6- Cliquez ensuite sur la map pour y placer différents points.
+6- Installez react-map-gl "npm install --save react-map-gl mapbox-gl"
+
+7- Tapez ensuite la commande " npm start "pour accéder au serveur de développement.
+
+8- Cliquez ensuite sur la map pour y placer différents points.

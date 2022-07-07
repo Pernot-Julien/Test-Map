@@ -72,50 +72,74 @@ function MapCity() {
   return (
     <>
       <h1 className="text-3xl ml-[2%] mt-[1%]">Contacts</h1>
-      <div className="w-[70%] h-[800px] ml-[2%] mt-[2%]  border-4 border-black">
-        <Map
-         onClick={count < 1 ? handleClick : undefined }
-        initialViewState={viewport}
-        width="100vw"
-        height="100vh"
-        /* mapboxApiAccessToken= {MAPBOX_TOKEN} */
-        onViewportChange={viewport => setViewport(viewport)}
-        {...viewport}
-        mapStyle="mapbox://styles/mapbox/streets-v9"
-        mapboxAccessToken={MAPBOX_TOKEN}
-        >  
-        <Marker longitude={-113.31} latitude={53.01} color="red"><img src={redMarker} alt="" className="w-[40px] translate-y-[-14px]"  /><p className="absolute top-[50%] left-[20px]">Titre à dynamiser</p></Marker>
-        <Marker longitude={6.002154} latitude={47.240724} color="red"><img src={redMarker} alt="" className="w-[40px] translate-y-[-14px]"  /><p className="absolute top-[50%] left-[20px]">Titre à dynamiser</p></Marker>
-        <Marker longitude={132.047449} latitude={67.233789} color="red"><img src={redMarker} alt="" className="w-[40px] translate-y-[-14px]"  /><p className="absolute top-[50%] left-[20px]">Titre à dynamiser</p></Marker>
-        
-          {  markers.map((coordinate) => (  
-            <>     
-            <Marker longitude={coordinate.long } latitude={coordinate.lat} color="red"><p className="absolute top-[50%] left-[20px]">Titre à dynamiser</p><img src={redMarker} alt="" className="w-[40px] translate-y-[-15px]"  /></Marker>
-            </>
-          ))}
-          {markersLastElement.map((coordinate) =>( counter(count) && closeWindow && 
-            <div className="absolute z-10 text-sm bg-gray-200 border-2 border-black w-[220px] h-[270px]" style={{position:'absolute', left:`${coordinate.left +"px"}` ,top:`${coordinate.top+"px"}`}}>
-              <button onClick={handleClickButton} className='ml-[200px]'>X</button>
-              <form className='flex flex-col' onSubmit={handleSubmit}>
-                <label htmlFor="Nom">Nom</label>
-                    <input type="text" className='mt-[10px] w-[90%] mx-auto' required="required" onChange={handleChangeText}/>
-                <label htmlFor="Description" className='mt-[10px]'>Description</label>
-                    <textarea id="Description" onChange={handleChangeDescription} name="Description" className="mt-[10px] w-[90%] mx-auto">
-                    </textarea>
-                <select name="type" onChange={handleChangeList} required="required" className="mt-[20px] w-[90%] mx-auto h-[25px]">
-                    <option value="">--Choisir une option--</option>
-                    <option value="Entreprise">Entreprise</option>
-                    <option value="Particulier">Particulier</option>
-                    <option value="Collectivité">Collectivité</option>
-                    </select>
-                    <input type="submit" value="Ajouter" className="border-1 border-black bg-blue-600 h-[30px] w-[100px] mx-auto mt-[20px]"/>
-                </form >
-              </div>))}
-        </Map>
-       
+      <div className="flex">
+        <div className="w-[70%] h-[800px] ml-[2%] mt-[2%]  border-4 border-black">
+          <Map
+          onClick={count < 1 ? handleClick : undefined }
+          initialViewState={viewport}
+          width="100vw"
+          height="100vh"
+          /* mapboxApiAccessToken= {MAPBOX_TOKEN} */
+          onViewportChange={viewport => setViewport(viewport)}
+          {...viewport}
+          mapStyle="mapbox://styles/mapbox/streets-v9"
+          mapboxAccessToken={MAPBOX_TOKEN}
+          >  
+          <Marker longitude={-113.31} latitude={53.01} color="red"><img src={redMarker} alt="" className="w-[40px] translate-y-[-14px]"  /><p className="absolute top-[50%] left-[20px]">Titre à dynamiser</p></Marker>
+          <Marker longitude={6.002154} latitude={47.240724} color="red"><img src={redMarker} alt="" className="w-[40px] translate-y-[-14px]"  /><p className="absolute top-[50%] left-[20px]">Titre à dynamiser</p></Marker>
+          <Marker longitude={132.047449} latitude={67.233789} color="red"><img src={redMarker} alt="" className="w-[40px] translate-y-[-14px]"  /><p className="absolute top-[50%] left-[20px]">Titre à dynamiser</p></Marker>
+          
+            {  markers.map((coordinate) => (  
+              <>     
+              <Marker longitude={coordinate.long } latitude={coordinate.lat} color="red"><p className="absolute top-[50%] left-[20px]">Titre à dynamiser</p><img src={redMarker} alt="" className="w-[40px] translate-y-[-15px]"  /></Marker>
+              </>
+            ))} 
+            {markersLastElement.map((coordinate) =>( counter(count) && closeWindow && 
+              <div className="absolute z-10 text-sm bg-gray-200 border-2 border-black w-[220px] h-[270px]" style={{position:'absolute', left:`${coordinate.left +"px"}` ,top:`${coordinate.top+"px"}`}}>
+                <button onClick={handleClickButton} className='ml-[200px]'>X</button>
+                <form className='flex flex-col' onSubmit={handleSubmit}>
+                  <label htmlFor="Nom">Nom</label>
+                      <input type="text" className='mt-[10px] w-[90%] mx-auto' required="required" onChange={handleChangeText}/>
+                  <label htmlFor="Description" className='mt-[10px]'>Description</label>
+                      <textarea id="Description" onChange={handleChangeDescription} name="Description" className="mt-[10px] w-[90%] mx-auto">
+                      </textarea>
+                  <select name="type" onChange={handleChangeList} required="required" className="mt-[20px] w-[90%] mx-auto h-[25px]">
+                      <option value="">--Choisir une option--</option>
+                      <option value="Entreprise">Entreprise</option>
+                      <option value="Particulier">Particulier</option>
+                      <option value="Collectivité">Collectivité</option>
+                      </select>
+                      <input type="submit" value="Ajouter" className="border-1 border-black bg-blue-600 h-[30px] w-[100px] mx-auto mt-[20px]"/>
+                  </form >
+                </div>))}
+          </Map>
+         
+        </div>
+        <div className="mx-auto text-2xl flex items-center ">
+              <table className="border-2 border-black w-[200px]">
+                <thead >
+                  <tr>
+                    <th>Contacts</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Item 1</td>
+                  </tr>
+
+                  <tr>
+                    <td>Item 2</td>
+                  </tr>
+                  <tr>
+                    <td>Item 3</td>
+                  </tr>
+                </tbody>
+            </table>
+          </div>
       </div>
     </>
   );
 }
 
 export default MapCity;
+ 
